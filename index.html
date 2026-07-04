@@ -3,63 +3,141 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Финансы офлайн</title>
-<link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#111111">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-title" content="Финансы">
+<title>Финансы</title>
 <style>
 body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;margin:0;background:#111;color:#fff}
 .wrap{max-width:520px;margin:auto;padding:18px}
-h1{font-size:26px;margin:10px 0 16px}.card{background:#1d1d1f;border-radius:18px;padding:16px;margin:12px 0}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-button{border:0;border-radius:14px;padding:15px;font-size:17px;font-weight:700;background:#2d2d30;color:#fff}
-button.active{background:#0a84ff}input{width:100%;box-sizing:border-box;border:0;border-radius:12px;padding:14px;margin:7px 0;font-size:17px}
-.add{background:#30d158;color:#000;width:100%;margin-top:8px}.row{display:flex;justify-content:space-between;border-bottom:1px solid #333;padding:8px 0}
-.small{color:#aaa;font-size:14px}.del{background:#ff453a;color:white;padding:6px 10px;border-radius:8px;font-size:13px}
-.tabs{display:flex;gap:8px;margin-bottom:10px}.tabs button{font-size:14px;padding:10px}.hidden{display:none}
+h1{font-size:30px;margin:12px 0 18px}
+.tabs{display:flex;gap:10px;margin-bottom:14px}
+.tabs button{padding:13px 16px;font-size:17px}
+.card{background:#1d1d1f;border-radius:22px;padding:16px;margin:14px 0}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+button{border:0;border-radius:18px;padding:18px;font-size:20px;font-weight:700;background:#2d2d30;color:#fff}
+button.active{background:#0a84ff}
+input{width:100%;box-sizing:border-box;border:0;border-radius:16px;padding:17px;margin:9px 0;font-size:20px}
+.add{background:#34c759;color:#000;width:100%;margin-top:10px}
+.row{display:flex;justify-content:space-between;gap:12px;border-bottom:1px solid #333;padding:12px 0;font-size:20px}
+.small{color:#aaa;font-size:14px}
+.del{background:#ff453a;color:#fff;padding:6px 10px;border-radius:9px;font-size:13px}
+.hidden{display:none}
 </style>
 </head>
 <body>
 <div class="wrap">
 <h1>Финансы офлайн</h1>
-<div class="tabs"><button onclick="showTab('main')">Главная</button><button onclick="showTab('history')">Журнал</button><button onclick="showTab('debts')">Долги</button></div>
+
+<div class="tabs">
+<button onclick="showTab('main')">Главная</button>
+<button onclick="showTab('history')">Журнал</button>
+<button onclick="showTab('debts')">Долги</button>
+</div>
+
 <div id="main">
 <div class="card">
-<div class="row"><span>Доходы</span><b id="income">0</b></div><div class="row"><span>Расходы</span><b id="expense">0</b></div>
-<div class="row"><span>Сбережения</span><b id="saving">0</b></div><div class="row"><span>Активы</span><b id="asset">0</b></div>
-<div class="row"><span>Свободные деньги</span><b id="free">0</b></div><div class="row"><span>Я должен</span><b id="debtOut">0</b></div>
-<div class="row"><span>Мне должны</span><b id="debtIn">0</b></div><div class="row"><span>Общий капитал</span><b id="capital">0</b></div>
+<div class="row"><span>Доходы</span><b id="income">0</b></div>
+<div class="row"><span>Расходы</span><b id="expense">0</b></div>
+<div class="row"><span>Сбережения</span><b id="saving">0</b></div>
+<div class="row"><span>Активы</span><b id="asset">0</b></div>
+<div class="row"><span>Свободные деньги</span><b id="free">0</b></div>
+<div class="row"><span>Я должен</span><b id="debtOut">0</b></div>
+<div class="row"><span>Мне должны</span><b id="debtIn">0</b></div>
+<div class="row"><span>Общий капитал</span><b id="capital">0</b></div>
 </div>
-<div class="card"><div class="grid">
-<button id="bДоход" onclick="setType('Доход')">+ Доход</button><button id="bРасход" onclick="setType('Расход')">− Расход</button>
-<button id="bСбережения" onclick="setType('Сбережения')">Сбережения</button><button id="bАктив" onclick="setType('Актив')">Актив</button></div>
-<input id="amount" type="number" placeholder="Сумма"><input id="comment" placeholder="Комментарий">
-<button class="add" onclick="addOperation()">Добавить</button></div></div>
-<div id="history" class="hidden"><div class="card" id="opsList"></div></div>
-<div id="debts" class="hidden"><div class="card"><div class="grid">
-<button id="dВзял" onclick="setDebtType('Взял')">Взял в долг</button><button id="dДал" onclick="setDebtType('Дал')">Дал в долг</button></div>
-<input id="debtAmount" type="number" placeholder="Сумма"><input id="person" placeholder="Кому / от кого"><input id="debtComment" placeholder="Комментарий">
-<button class="add" onclick="addDebt()">Добавить долг</button></div><div class="card" id="debtsList"></div></div>
-<p class="small">После установки работает без интернета. Данные сохраняются на этом телефоне.</p></div>
+
+<div class="card">
+<div class="grid">
+<button id="bДоход" onclick="setType('Доход')">+ Доход</button>
+<button id="bРасход" onclick="setType('Расход')">− Расход</button>
+<button id="bСбережения" onclick="setType('Сбережения')">Сбережения</button>
+<button id="bАктив" onclick="setType('Актив')">Актив</button>
+</div>
+<input id="amount" type="number" inputmode="decimal" placeholder="Сумма">
+<input id="comment" placeholder="Комментарий">
+<button class="add" onclick="addOperation()">Добавить</button>
+</div>
+</div>
+
+<div id="history" class="hidden">
+<div class="card" id="opsList">Пока пусто</div>
+</div>
+
+<div id="debts" class="hidden">
+<div class="card">
+<div class="grid">
+<button id="dВзял" onclick="setDebtType('Взял')">Взял в долг</button>
+<button id="dДал" onclick="setDebtType('Дал')">Дал в долг</button>
+</div>
+<input id="debtAmount" type="number" inputmode="decimal" placeholder="Сумма">
+<input id="person" placeholder="Кому / от кого">
+<input id="debtComment" placeholder="Комментарий">
+<button class="add" onclick="addDebt()">Добавить долг</button>
+</div>
+<div class="card" id="debtsList">Пока пусто</div>
+</div>
+
+<p class="small">Данные сохраняются на этом телефоне в браузере. Работает без регистрации.</p>
+</div>
+
 <script>
-if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js')}
-let ops=JSON.parse(localStorage.getItem('ops')||'[]');let debts=JSON.parse(localStorage.getItem('debts')||'[]');let type='Расход', debtType='Взял';
+let ops=JSON.parse(localStorage.getItem('finance_ops_v1')||'[]');
+let debts=JSON.parse(localStorage.getItem('finance_debts_v1')||'[]');
+let type='Расход', debtType='Взял';
+
 function money(n){return (Number(n)||0).toLocaleString('ru-RU',{maximumFractionDigits:2})}
-function save(){localStorage.setItem('ops',JSON.stringify(ops));localStorage.setItem('debts',JSON.stringify(debts));render()}
-function setType(t){type=t;['Доход','Расход','Сбережения','Актив'].forEach(x=>document.getElementById('b'+x).classList.toggle('active',x==t))}
-function setDebtType(t){debtType=t;['Взял','Дал'].forEach(x=>document.getElementById('d'+x).classList.toggle('active',x==t))}
-function addOperation(){let a=Number(document.getElementById('amount').value);if(!a)return;ops.push({date:new Date().toLocaleDateString('ru-RU'),type,amount:a,comment:document.getElementById('comment').value});document.getElementById('amount').value='';document.getElementById('comment').value='';save()}
-function addDebt(){let a=Number(document.getElementById('debtAmount').value);if(!a)return;debts.push({date:new Date().toLocaleDateString('ru-RU'),type:debtType,amount:a,person:document.getElementById('person').value,comment:document.getElementById('debtComment').value});document.getElementById('debtAmount').value='';document.getElementById('person').value='';document.getElementById('debtComment').value='';save()}
-function delOp(i){ops.splice(i,1);save()}function delDebt(i){debts.splice(i,1);save()}
-function showTab(id){['main','history','debts'].forEach(x=>document.getElementById(x).classList.toggle('hidden',x!=id));render()}
-function sum(arr,t){return arr.filter(x=>x.type==t).reduce((s,x)=>s+Number(x.amount),0)}
-function render(){let income=sum(ops,'Доход'),expense=sum(ops,'Расход'),saving=sum(ops,'Сбережения'),asset=sum(ops,'Актив');let debtOut=sum(debts,'Взял'),debtIn=sum(debts,'Дал');
-income=document.getElementById('income').textContent=money(income);document.getElementById('expense').textContent=money(expense);document.getElementById('saving').textContent=money(saving);document.getElementById('asset').textContent=money(asset);
-document.getElementById('free').textContent=money(sum(ops,'Доход')-sum(ops,'Расход')-sum(ops,'Сбережения')-sum(ops,'Актив'));document.getElementById('debtOut').textContent=money(debtOut);document.getElementById('debtIn').textContent=money(debtIn);
-document.getElementById('capital').textContent=money(sum(ops,'Доход')-sum(ops,'Расход')+sum(ops,'Сбережения')+sum(ops,'Актив')+debtIn-debtOut);
-document.getElementById('opsList').innerHTML=ops.slice().reverse().map((o,ri)=>{let i=ops.length-1-ri;return `<div class="row"><span>${o.date} — ${o.type}<br><span class="small">${o.comment||''}</span></span><b>${money(o.amount)} <button class="del" onclick="delOp(${i})">×</button></b></div>`}).join('')||'Пока пусто';
-document.getElementById('debtsList').innerHTML=debts.slice().reverse().map((d,ri)=>{let i=debts.length-1-ri;return `<div class="row"><span>${d.date} — ${d.type}<br><span class="small">${d.person||''} ${d.comment||''}</span></span><b>${money(d.amount)} <button class="del" onclick="delDebt(${i})">×</button></b></div>`}).join('')||'Пока пусто'}
-setType(type);setDebtType(debtType);render();
+function sum(arr,t){return arr.filter(x=>x.type===t).reduce((s,x)=>s+Number(x.amount||0),0)}
+function save(){localStorage.setItem('finance_ops_v1',JSON.stringify(ops));localStorage.setItem('finance_debts_v1',JSON.stringify(debts));render()}
+
+function setType(t){
+ type=t;
+ ['Доход','Расход','Сбережения','Актив'].forEach(x=>document.getElementById('b'+x).classList.toggle('active',x===t));
+}
+function setDebtType(t){
+ debtType=t;
+ ['Взял','Дал'].forEach(x=>document.getElementById('d'+x).classList.toggle('active',x===t));
+}
+function addOperation(){
+ let a=Number(document.getElementById('amount').value);
+ if(!a){alert('Введи сумму');return}
+ ops.push({date:new Date().toLocaleDateString('ru-RU'),type:type,amount:a,comment:document.getElementById('comment').value});
+ document.getElementById('amount').value=''; document.getElementById('comment').value='';
+ save();
+}
+function addDebt(){
+ let a=Number(document.getElementById('debtAmount').value);
+ if(!a){alert('Введи сумму');return}
+ debts.push({date:new Date().toLocaleDateString('ru-RU'),type:debtType,amount:a,person:document.getElementById('person').value,comment:document.getElementById('debtComment').value});
+ document.getElementById('debtAmount').value=''; document.getElementById('person').value=''; document.getElementById('debtComment').value='';
+ save();
+}
+function delOp(i){ if(confirm('Удалить запись?')){ops.splice(i,1);save()} }
+function delDebt(i){ if(confirm('Удалить долг?')){debts.splice(i,1);save()} }
+function showTab(id){
+ ['main','history','debts'].forEach(x=>document.getElementById(x).classList.toggle('hidden',x!==id));
+ render();
+}
+function render(){
+ const income=sum(ops,'Доход'), expense=sum(ops,'Расход'), saving=sum(ops,'Сбережения'), asset=sum(ops,'Актив');
+ const debtOut=sum(debts,'Взял'), debtIn=sum(debts,'Дал');
+ document.getElementById('income').textContent=money(income);
+ document.getElementById('expense').textContent=money(expense);
+ document.getElementById('saving').textContent=money(saving);
+ document.getElementById('asset').textContent=money(asset);
+ document.getElementById('free').textContent=money(income-expense-saving-asset);
+ document.getElementById('debtOut').textContent=money(debtOut);
+ document.getElementById('debtIn').textContent=money(debtIn);
+ document.getElementById('capital').textContent=money(income-expense+saving+asset+debtIn-debtOut);
+
+ document.getElementById('opsList').innerHTML = ops.length ? ops.slice().reverse().map((o,ri)=>{
+   let i=ops.length-1-ri;
+   return `<div class="row"><span>${o.date} — ${o.type}<br><span class="small">${o.comment||''}</span></span><b>${money(o.amount)} <button class="del" onclick="delOp(${i})">×</button></b></div>`;
+ }).join('') : 'Пока пусто';
+
+ document.getElementById('debtsList').innerHTML = debts.length ? debts.slice().reverse().map((d,ri)=>{
+   let i=debts.length-1-ri;
+   return `<div class="row"><span>${d.date} — ${d.type}<br><span class="small">${d.person||''} ${d.comment||''}</span></span><b>${money(d.amount)} <button class="del" onclick="delDebt(${i})">×</button></b></div>`;
+ }).join('') : 'Пока пусто';
+}
+setType(type); setDebtType(debtType); render();
 </script>
-</body></html>
+</body>
+</html>
